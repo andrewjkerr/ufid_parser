@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["me+github@andrewjkerr.com"]
 
   spec.summary       = %q{Parses UFID numbers given a string from a UFID magnetic strip.}
-  spec.description   = %q{Parses UFID numbers given a string from a UFID magnetic strip}
+  spec.description   = %q{Parses UFID numbers given a string from a UFID magnetic strip.}
   spec.homepage      = "https://github.com/andrewjkerr/ufid_parser"
   spec.license       = "MIT"
 
