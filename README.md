@@ -1,6 +1,6 @@
 # UFIDParser
 
-The UFIDParser takes in a string read from the barcode on a UFID and spits back out the UFID number.
+The UFIDParser takes in a string read from the barcode on a UFID and gives you access to the UFID number stored on the barcode.
 
 ## Installation
 
