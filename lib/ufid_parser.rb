@@ -11,8 +11,12 @@ module UfidParser
         private
 
         def parse_ufid_number(str)
+            splitter = [] << str[1]
+            splitter << str[-3]
+            splitter_str = "0#{splitter.reverse.join('')}00"
+
             # Barcode has two occurrances of UFID number separated by this string
-            ufid_number_arr = str.split('02200')
+            ufid_number_arr = str.split(splitter_str)
 
             # Cut out the junk
             ufid_number_arr[0] = ufid_number_arr.first[4..-1]

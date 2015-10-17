@@ -9,31 +9,55 @@ describe UfidParser do
         before { @expected = '12345678' }
 
         describe 'and the two UFID numbers match up' do
-            before { @input = ';200123456780220012345678020?' }
+            @arr = [';200123456780220012345678020?', ';200123456780120012345678010?']
+            describe 'with 02200 as the separator' do
+                before { @input = ';200123456780220012345678020?' }
 
-            it 'correctly returns the UFID number' do
-                expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                it 'correctly returns the UFID number' do
+                    expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                end
+            end
+
+            describe 'with 01200 as the separator' do
+                before { @input = ';200123456780120012345678010?' }
+
+                it 'correctly returns the UFID number' do
+                    expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                end
             end
         end
 
         describe 'and one UFID number is correct while the other is malformatted' do
+            describe 'with 02200 as the separator' do
 
-            it 'correctly returns the first UFID number' do
-                @input = ';20012345678022001234568020?'
-                expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                it 'correctly returns the first UFID number' do
+                    @input = ';20012345678022001234568020?'
+                    expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                end
+
+                it 'correctly returns the last UFID number' do
+                    @input = ';20012345680220012345678020?'
+                    expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                end
             end
 
-            it 'correctly returns the last UFID number' do
-                @input = ';20012345680220012345678020?'
-                expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+            describe 'with 01200 as the separator' do
+
+                it 'correctly returns the first UFID number' do
+                    @input = ';20012345678012001234568010?'
+                    expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                end
+
+                it 'correctly returns the last UFID number' do
+                    @input = ';20012345680120012345678010?'
+                    expect(UfidParser::UFID.new(@input).ufid_number).to eq(@expected)
+                end
             end
         end
     end
 
     describe 'without a valid UFID number' do
-
         describe 'and both UFID numbers are not 8 characters' do
-
             describe 'and the same length' do 
 
                 it 'throws an exception' do
